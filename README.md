@@ -1,2 +1,2 @@
 # image-resize
-Image Resize
+Image Resize and save JPG, PNG, and GIF using PHP.
