@@ -165,7 +165,7 @@ class Image_Resize
 		$offset_x	= 0;
 		$offset_y	= 0;
 		
-		if($max_width===$max_height) // if square image
+		if ($max_width===$max_height) // if square image
 		{
 			$ratioComputed		= $width / $height;
 			$cropRatioComputed	= (float) $max_width / (float) $max_height;
@@ -187,13 +187,13 @@ class Image_Resize
 		$x_ratio = $max_width / $width;
 	    $y_ratio = $max_height / $height;
 	
-	    if( ($width <= $max_width) && ($height <= $max_height) ){
+	    if (($width <= $max_width) && ($height <= $max_height)) {
 	        $tn_width = $width;
 	        $tn_height = $height;
-	        }elseif (($x_ratio * $height) < $max_height){
+	        } elseif (($x_ratio * $height) < $max_height){
 	            $tn_height = ceil($x_ratio * $height);
 	            $tn_width = $max_width;
-	        }else{
+	        } else {
 	            $tn_width = ceil($y_ratio * $width);
 	            $tn_height = $max_height;
 	    }		
@@ -217,7 +217,7 @@ class Image_Resize
 		// Sharpen the image based on two things:
 		//	(1) the difference between the original size and the final size
 		//	(2) the final size
-		if($doSharpen==true)
+		if ($doSharpen==true)
 		{
 			$sharpness	= $this->_findSharp($width, $tn_width);
 			$sharpenMatrix	= array(
@@ -249,7 +249,7 @@ class Image_Resize
 			case 'imagejpeg':
 				imagejpeg($tmp, null, $quality);
 				break;
-			default :
+			default:
 				throw new Exception('Image cannot be created.');
 				break;
 				
