@@ -16,41 +16,41 @@ class Image_Resize
 	 * initialize
 	 */	
 	public function resize()
-    {
-    	return $this;
-    }
+	{
+    		return $this;
+	}
 	
-	public function resizeExact($src,$newWidth,$newHeight,$quality=90)
+	public function resizeExact($src, $newWidth, $newHeight, $quality=90)
 	{		
 		/*
 		 * load the source image  
 		 */ 
 		$info = pathinfo($src);
-        $extension = strtolower($info['extension']);
-        if (in_array($extension, array('jpg', 'jpeg', 'png', 'gif'))) {
-            switch ($extension) {
-                case 'gif':
-                    $sourceImage 		= imagecreatefromgif($src);
-                    $doSharpen			= false;
-                    $quality			= round(10 - ($quality / 10));
-                    $output_type		= 'imagegif';
-                    break;
-                case 'png':
-                    $sourceImage 		= imagecreatefrompng($src);
-                    $doSharpen			= false;
-                    $quality			= round(10 - ($quality / 10));
-                    $output_type		= 'imagepng';
-                    break;
-                case 'jpeg':
-                case 'jpg':
-                    $sourceImage 		= imagecreatefromjpeg($src);
-                    $doSharpen			= true;
-                    $output_type		= 'imagejpeg';
-                    break;
-                default:
-                	throw new Exception('Image extension is invalid or not supported.');
-                	break;
-            }
+        	$extension = strtolower($info['extension']);
+        	if (in_array($extension, array('jpg', 'jpeg', 'png', 'gif'))) {
+			switch ($extension) {
+				case 'gif':
+					$sourceImage 		= imagecreatefromgif($src);
+					$doSharpen			= false;
+					$quality			= round(10 - ($quality / 10));
+					$output_type		= 'imagegif';
+					break;
+				case 'png':
+					$sourceImage 		= imagecreatefrompng($src);
+					$doSharpen			= false;
+					$quality			= round(10 - ($quality / 10));
+					$output_type		= 'imagepng';
+					break;
+				case 'jpeg':
+				case 'jpg':
+					$sourceImage 		= imagecreatefromjpeg($src);
+					$doSharpen			= true;
+					$output_type		= 'imagejpeg';
+					break;
+				default:
+					throw new Exception('Image extension is invalid or not supported.');
+					break;
+			}
 		} 
 		
 		/**
@@ -70,7 +70,7 @@ class Image_Resize
 		/**
 		 * copy source image at a resized size
 		 */
-		imagecopyresampled($tmp, $sourceImage,0,0,0,0, $newWidth, $newHeight, $width, $height);
+		imagecopyresampled($tmp, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 			
 		/**
 		 * sharpen the image
@@ -120,7 +120,7 @@ class Image_Resize
 		return $final_image;
 	}
 	
-	public function resizeRatio($src,$max_width,$max_height,$quality=90)
+	public function resizeRatio($src ,$max_width, $max_height, $quality=90)
 	{		
 		/**
 		 * load the source image  
