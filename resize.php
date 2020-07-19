@@ -64,8 +64,9 @@ class Image_Resize
 		 */
 		$tmp = imagecreatetruecolor($newWidth, $newHeight);
 		
-		if ($extension == 'gif' || $extension == 'png')
+		if ($extension == 'gif' || $extension == 'png') {
 			$this->_handleTransparentColor($tmp, $newWidth, $newHeight);
+		}
 
 		/**
 		 * copy source image at a resized size
@@ -114,9 +115,9 @@ class Image_Resize
 		}				
 		$final_image = ob_get_contents();
 
-    	ob_end_clean();	
+    		ob_end_clean();	
     	
-    	// done and done!	
+    		// done and done!	
 		return $final_image;
 	}
 	
@@ -126,31 +127,31 @@ class Image_Resize
 		 * load the source image  
 		 */ 
 		$info = pathinfo($src);
-        $extension = strtolower($info['extension']);
-        if (in_array($extension, array('jpg', 'jpeg', 'png', 'gif'))) {
-            switch ($extension) {
-                case 'gif':
-                    $sourceImage 		= imagecreatefromgif($src);
-                    $doSharpen			= false;
-                    $quality			= round(10 - ($quality / 10));
-                    $output_type		= 'imagegif';
-                    break;
-                case 'png':
-                    $sourceImage 		= imagecreatefrompng($src);
-                    $doSharpen			= false;
-                    $quality			= round(10 - ($quality / 10));
-                    $output_type		= 'imagepng';
-                    break;
-                case 'jpeg':
-                case 'jpg':
-                    $sourceImage 		= imagecreatefromjpeg($src);
-                    $doSharpen			= true;
-                    $output_type		= 'imagejpeg';
-                    break;
-                default:
-                	throw new Exception('Image extension is invalid or not supported.');
-                	break;
-            }
+       		$extension = strtolower($info['extension']);
+		if (in_array($extension, array('jpg', 'jpeg', 'png', 'gif'))) {
+			switch ($extension) {
+				case 'gif':
+					$sourceImage 		= imagecreatefromgif($src);
+					$doSharpen		= false;
+					$quality		= round(10 - ($quality / 10));
+					$output_type		= 'imagegif';
+					break;
+				case 'png':
+					$sourceImage 		= imagecreatefrompng($src);
+					$doSharpen		= false;
+					$quality		= round(10 - ($quality / 10));
+					$output_type		= 'imagepng';
+					break;
+				case 'jpeg':
+				case 'jpg':
+					$sourceImage 		= imagecreatefromjpeg($src);
+					$doSharpen		= true;
+					$output_type		= 'imagejpeg';
+					break;
+				default:
+					throw new Exception('Image extension is invalid or not supported.');
+					break;
+			}
 		} 
 		
 		/**
@@ -185,26 +186,27 @@ class Image_Resize
 		} 
 	 
 		$x_ratio = $max_width / $width;
-	    $y_ratio = $max_height / $height;
+	    	$y_ratio = $max_height / $height;
 	
-	    if (($width <= $max_width) && ($height <= $max_height)) {
-	        $tn_width = $width;
-	        $tn_height = $height;
-	        } elseif (($x_ratio * $height) < $max_height){
-	            $tn_height = ceil($x_ratio * $height);
-	            $tn_width = $max_width;
-	        } else {
-	            $tn_width = ceil($y_ratio * $width);
-	            $tn_height = $max_height;
-	    }		
+		if (($width <= $max_width) && ($height <= $max_height)) {
+			$tn_width = $width;
+			$tn_height = $height;
+		} elseif (($x_ratio * $height) < $max_height){
+			$tn_height = ceil($x_ratio * $height);
+			$tn_width = $max_width;
+		} else {
+			$tn_width = ceil($y_ratio * $width);
+			$tn_height = $max_height;
+		}		
 
 		/**
 		 * create a new, temporary image
 		 */
 		$tmp = imagecreatetruecolor($tn_width, $tn_height);
 		
-		if ($extension == 'gif' || $extension == 'png')
+		if ($extension == 'gif' || $extension == 'png') {
 			$this->_handleTransparentColor($tmp, $tn_width, $tn_height);
+		}
 		
 		/**
 		 * copy source image at a resized size
@@ -238,7 +240,7 @@ class Image_Resize
 		/**
 		 * use the proper output type to create the image 
 		 */
-		switch($output_type)
+		switch ($output_type)
 		{
 			case 'imagegif':  // using imagepng instead of imagegif	
 				imagepng($tmp, null, 6);
@@ -256,9 +258,9 @@ class Image_Resize
 		}				
 		$final_image = ob_get_contents();
 
-    	ob_end_clean();	
+    		ob_end_clean();	
     	
-    	// done and done!	
+    		// done and done!	
 		return $final_image;
 	}
 	
@@ -295,4 +297,5 @@ class Image_Resize
 		
 		return max(round($result), 0);
 	}	
-} ?>
+} 
+?>
